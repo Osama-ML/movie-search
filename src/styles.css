@@ -5,23 +5,34 @@
 }
 
 body {
-  background-color: #4e4e4e;
+  background-color: #1b1b1b;
   min-height: 100vh;
   margin: 0 auto;
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
 h1 {
-  width: auto;
+  text-align: center;
 }
-
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .container {
+  margin-top: 32px;
   border: 1px solid #e2e2e2;
+  background-color: #4e4e4e;
   color: #fff;
   padding: 16px;
   border-radius: 4px;
+}
+
+footer {
+  text-align: center;
+  justify-self: end;
 }

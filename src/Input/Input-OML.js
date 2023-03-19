@@ -6,7 +6,7 @@ class InputOML extends HTMLElement {
     this.attachShadow({ mode: 'open' });
   }
 
-  test(e) {
+  handleInput(e) {
     console.log(e.target.value);
     e.target.value = this.input.value;
     document.querySelector('.container').textContent = e.target.value;
@@ -21,7 +21,7 @@ class InputOML extends HTMLElement {
     this.input = this.shadowRoot.querySelector('input');
     this.input.type = 'text';
     this.input.className = 'input-html';
-    this.input.addEventListener('input', (e) => this.test(e));
+    this.input.addEventListener('input', (e) => this.handleInput(e));
   }
 }
 
