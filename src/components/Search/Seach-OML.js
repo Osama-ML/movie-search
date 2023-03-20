@@ -1,4 +1,4 @@
-// import { styles } from './Input-OML.styles.js';
+import { styles } from './Search-OML.styles';
 
 class SearchOML extends HTMLElement {
   constructor() {
@@ -13,7 +13,7 @@ class SearchOML extends HTMLElement {
             <button-oml></button-oml>
         </div>
     `;
-    // this.shadowRoot.innerHTML += styles;
+    this.shadowRoot.innerHTML += styles;
   }
 }
 

@@ -2,7 +2,7 @@ export const styles = /* css */ `
     <style>
         button {
             position: absolute;
-            left: 57%;
+            left: 80%;
             background-color: transparent;
             border: none;
             border-radius: 50%;
