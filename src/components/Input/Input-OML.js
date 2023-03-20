@@ -7,7 +7,6 @@ class InputOML extends HTMLElement {
   }
 
   handleInput(e) {
-    console.log(e.target.value);
     e.target.value = this.input.value;
     document.querySelector('.container').textContent = e.target.value;
   }

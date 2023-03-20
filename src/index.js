@@ -1,5 +1,7 @@
 import { sayHi } from './utils.js';
-import './Input/Input-OML';
+import './components/Search/Seach-OML';
+import './components/Input/Input-OML';
+import './components/Button/Button-OML';
 import './styles.css';
 
 const result = sayHi();
