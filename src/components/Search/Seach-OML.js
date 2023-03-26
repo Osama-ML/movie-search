@@ -14,6 +14,12 @@ class SearchOML extends HTMLElement {
   handleEvent(event) {
     if (event.type === '[input-oml]-new-value') {
       this.setAttribute('titleToSearch', event.detail.data);
+      const titleToSearchEvent = new CustomEvent('[search-oml]-search-value', {
+        detail: { data: this.getAttribute('titleToSearch') },
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(titleToSearchEvent);
     }
   }
 
