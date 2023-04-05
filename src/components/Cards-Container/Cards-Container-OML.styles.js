@@ -1,7 +1,7 @@
 export const styles = /* css */ `
     <style>
-        .card {
-            display: block;
+        .cards-container {
+            display: flex;
         }
     </style>
 `;
