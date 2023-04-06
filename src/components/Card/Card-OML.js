@@ -6,9 +6,15 @@ class CardOML extends HTMLElement {
     this.attachShadow({ mode: 'open' });
   }
 
+  static get observedAttributes() {
+    return ['title'];
+  }
+
   render() {
     this.shadowRoot.innerHTML = /*html*/ `
-        <div class="cards"></div>
+        <div class="card">
+          ${this.getAttribute('title')}
+        </div>
     `;
     this.shadowRoot.innerHTML += styles;
   }
