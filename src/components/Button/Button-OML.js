@@ -17,14 +17,22 @@ class ButtonOML extends HTMLElement {
     const options = {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': apiKey,
+        'X-RapidAPI-Key': '3c2d7ca130mshdaa563740331f48p16fe5ajsnaddd9f590083',
         'X-RapidAPI-Host': 'moviesdb5.p.rapidapi.com',
       },
     };
 
-    fetch(`https://moviesdb5.p.rapidapi.com/om?t=${title}`, options)
+    fetch(`https://moviesdb5.p.rapidapi.com/om?s=${title}`, options)
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => {
+        const titleToSearchEvent = new CustomEvent('[button-oml]-search-value', {
+          detail: { data: response },
+          bubbles: true,
+          composed: true,
+        });
+        this.dispatchEvent(titleToSearchEvent);
+        console.log(response);
+      })
       .catch((err) => console.error(err));
   }
 

@@ -7,6 +7,13 @@ class CardsContainerOML extends HTMLElement {
     this.data = ['GoT', 'Batman', 'SuperMan'];
   }
 
+  handleEvent(event) {
+    if (event.type === '[search-oml]-response-value') {
+      this.data = event.detail;
+      console.log(this.data);
+    }
+  }
+
   render() {
     this.shadowRoot.innerHTML =
       /*html*/
@@ -30,6 +37,7 @@ class CardsContainerOML extends HTMLElement {
   }
 
   connectedCallback() {
+    document.addEventListener('[search-oml]-response-value', this);
     this.render();
     this.data.length ? this.createCards() : this.errorMessage();
   }
