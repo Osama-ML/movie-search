@@ -8,16 +8,30 @@ class CardsContainerOML extends HTMLElement {
   }
 
   render() {
-    this.shadowRoot.innerHTML = /*html*/ `
-        <div class="cards-container">
-          ${this.data.map((movie) => /*html*/ `<card-oml title="${movie}"></card-oml>`)}
-        </div>
-    `;
+    this.shadowRoot.innerHTML =
+      /*html*/
+      `<div class="cards-container"></div>`;
     this.shadowRoot.innerHTML += styles;
+  }
+
+  createCards() {
+    this.data.map((movie) => {
+      const cardElement = document.createElement('card-oml');
+      cardElement.setAttribute('title', movie);
+      this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
+    });
+  }
+
+  errorMessage() {
+    const errorElement = document.createElement('p');
+    errorElement.textContent = 'Movie not found, try later';
+    errorElement.className = 'error';
+    this.shadowRoot.querySelector('.cards-container').appendChild(errorElement);
   }
 
   connectedCallback() {
     this.render();
+    this.data.length ? this.createCards() : this.errorMessage();
   }
 }
 

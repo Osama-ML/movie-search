@@ -7,5 +7,10 @@ export const styles = /* css */ `
             width: 80vw;
             height: auto;
         }
+        .error {
+            color: #ff97a0;
+            text-align: center;
+            width: 100%;
+        }
     </style>
 `;
