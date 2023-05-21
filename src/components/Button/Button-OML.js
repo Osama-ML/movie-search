@@ -1,3 +1,4 @@
+import { handleMockResponse } from '../../mocks/movies-mock-response-handler.js';
 import { styles } from './Button-OML.styles.js';
 import { apiKey } from './variables.js';
 
@@ -14,26 +15,28 @@ class ButtonOML extends HTMLElement {
 
   handleClick() {
     const title = this.getAttribute('titleToSearch');
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '3c2d7ca130mshdaa563740331f48p16fe5ajsnaddd9f590083',
-        'X-RapidAPI-Host': 'moviesdb5.p.rapidapi.com',
-      },
-    };
+    const data = handleMockResponse(title);
+    // TODO : remove mock calls and implement real api services
+    // const options = {
+    //   method: 'GET',
+    //   headers: {
+    //     'X-RapidAPI-Key': apiKey,
+    //     'X-RapidAPI-Host': 'moviesdb5.p.rapidapi.com',
+    //   },
+    // };
 
-    fetch(`https://moviesdb5.p.rapidapi.com/om?s=${title}`, options)
-      .then((response) => response.json())
-      .then((response) => {
-        const titleToSearchEvent = new CustomEvent('[button-oml]-search-value', {
-          detail: { data: response },
-          bubbles: true,
-          composed: true,
-        });
-        this.dispatchEvent(titleToSearchEvent);
-        console.log(response);
-      })
-      .catch((err) => console.error(err));
+    // fetch(`https://moviesdb5.p.rapidapi.com/om?t=${title}`, options)
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     const titleToSearchEvent = new CustomEvent('[button-oml]-search-value', {
+    //       detail: { data: response },
+    //       bubbles: true,
+    //       composed: true,
+    //     });
+    //     this.dispatchEvent(titleToSearchEvent);
+    //     console.log(response);
+    //   })
+    //   .catch((err) => console.error(err));
   }
 
   handleEvent(event) {
