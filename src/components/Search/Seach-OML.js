@@ -22,7 +22,7 @@ class SearchOML extends HTMLElement {
       });
       this.dispatchEvent(titleToSearchEvent);
     } else if (event.type === '[button-oml]-search-value') {
-      this.setAttribute('searchResponse', event.detail);
+      this.setAttribute('searchResponse', JSON.stringify(event.detail.data));
       const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
         detail: { data: this.getAttribute('searchResponse') },
         bubbles: true,
