@@ -1,45 +1,55 @@
+import { generarID } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 class CardsContainerOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.data = ['GoT', 'Batman', 'SuperMan'];
+    this.setAttribute('data', []);
+  }
+
+  static get observedAttributes() {
+    return ['data'];
   }
 
   handleEvent(event) {
     if (event.type === '[search-oml]-response-value') {
-      this.data = event.detail;
-      console.log(this.data);
+      this.setAttribute('data', event.detail.data);
+      this.render();
     }
+  }
+
+  handleCardsProps() {
+    let movie = this.getAttribute('data');
+
+    let cards = this.shadowRoot.querySelectorAll('card-oml') || [];
+    cards.length > 0
+      ? cards.forEach((card) => {
+          card.setAttribute('id', generarID());
+          card.setAttribute('data', movie);
+        })
+      : null;
   }
 
   render() {
     this.shadowRoot.innerHTML =
       /*html*/
-      `<div class="cards-container"></div>`;
+      `<div class="cards-container">
+      ${
+        this.getAttribute('data').length > 10
+          ? JSON.parse(this.getAttribute('data')).map((item) => {
+              return '<card-oml></card-oml>';
+            })
+          : 'Something went wrong'
+      }
+      </div>`;
+    this.getAttribute('data').length > 10 && this.handleCardsProps();
     this.shadowRoot.innerHTML += styles;
-  }
-
-  createCards() {
-    this.data.map((movie) => {
-      const cardElement = document.createElement('card-oml');
-      cardElement.setAttribute('title', movie);
-      this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
-    });
-  }
-
-  errorMessage() {
-    const errorElement = document.createElement('p');
-    errorElement.textContent = 'Movie not found, try later';
-    errorElement.className = 'error';
-    this.shadowRoot.querySelector('.cards-container').appendChild(errorElement);
   }
 
   connectedCallback() {
     document.addEventListener('[search-oml]-response-value', this);
     this.render();
-    this.data.length ? this.createCards() : this.errorMessage();
   }
 }
 

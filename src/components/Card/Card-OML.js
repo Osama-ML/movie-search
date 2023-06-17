@@ -7,20 +7,20 @@ class CardOML extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['title'];
+    return ['data'];
   }
 
   render() {
     this.shadowRoot.innerHTML = /*html*/ `
-        <div class="card">
-          ${this.getAttribute('title')}
-        </div>
+          <div class="card">
+            ${JSON.parse(this.getAttribute('data'))[0].Title}
+          </div>
     `;
     this.shadowRoot.innerHTML += styles;
   }
 
   connectedCallback() {
-    this.render();
+    this.getAttribute('data') && this.render();
   }
 }
 
