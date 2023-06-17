@@ -19,31 +19,18 @@ class CardsContainerOML extends HTMLElement {
     }
   }
 
-  handleCardsProps() {
-    let movie = this.getAttribute('data');
-
-    let cards = this.shadowRoot.querySelectorAll('card-oml') || [];
-    cards.length > 0
-      ? cards.forEach((card) => {
-          card.setAttribute('id', generarID());
-          card.setAttribute('data', movie);
-        })
-      : null;
-  }
-
   render() {
     this.shadowRoot.innerHTML =
       /*html*/
-      `<div class="cards-container">
+      `<ul class="cards-container">
       ${
         this.getAttribute('data').length > 10
           ? JSON.parse(this.getAttribute('data')).map((item) => {
-              return '<card-oml></card-oml>';
+              return /*html*/ `<li class="card" id=${generarID()}>${item.Title}</li>`;
             })
           : 'Something went wrong'
       }
-      </div>`;
-    this.getAttribute('data').length > 10 && this.handleCardsProps();
+      </ul>`;
     this.shadowRoot.innerHTML += styles;
   }
 
