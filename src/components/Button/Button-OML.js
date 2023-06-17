@@ -16,6 +16,14 @@ class ButtonOML extends HTMLElement {
   handleClick() {
     const title = this.getAttribute('titleToSearch');
     const data = handleMockResponse(title);
+    const titleToSearchEvent = new CustomEvent('[button-oml]-search-value', {
+      detail: { data },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(titleToSearchEvent);
+
     // TODO : remove mock calls and implement real api services
     // const options = {
     //   method: 'GET',
