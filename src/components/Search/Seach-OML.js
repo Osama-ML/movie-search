@@ -5,10 +5,11 @@ class SearchOML extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.setAttribute('titleToSearch', '');
+    this.setAttribute('searchResponse', '');
   }
 
   static get observedAttributes() {
-    return ['titleToSearch'];
+    return ['titleToSearch', 'searchResponse'];
   }
 
   handleEvent(event) {
@@ -20,6 +21,14 @@ class SearchOML extends HTMLElement {
         composed: true,
       });
       this.dispatchEvent(titleToSearchEvent);
+    } else if (event.type === '[button-oml]-search-value') {
+      this.setAttribute('searchResponse', JSON.stringify(event.detail.data));
+      const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
+        detail: { data: this.getAttribute('searchResponse') },
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(searchResponsedEvent);
     }
   }
 
@@ -35,6 +44,7 @@ class SearchOML extends HTMLElement {
 
   connectedCallback() {
     document.addEventListener('[input-oml]-new-value', this);
+    document.addEventListener('[button-oml]-search-value', this);
     this.render();
   }
 }

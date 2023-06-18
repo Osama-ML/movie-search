@@ -24,7 +24,6 @@ class InputOML extends HTMLElement {
 
   handleInput(e) {
     this.setAttribute('value', e.target.value);
-    document.querySelector('.container').textContent = e.target.value;
   }
 
   manageInput() {
