@@ -2,10 +2,12 @@ export const styles = /* css */ `
     <style>
         .cards-container {
             display: flex;
+            flex-direction: row;
             margin-top: 16px;
             justify-content: space-between;
             width: 80vw;
             height: auto;
+            gap: 10px;
         }
         .error {
             color: #ff97a0;

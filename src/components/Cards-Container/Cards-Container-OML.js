@@ -19,18 +19,27 @@ class CardsContainerOML extends HTMLElement {
     }
   }
 
+  renderCards() {
+    if (this.getAttribute('data').length > 10) {
+      JSON.parse(this.getAttribute('data')).map((item) => {
+        let cardElement = document.createElement('li');
+        cardElement.setAttribute('id', generarID());
+        cardElement.setAttribute('class', 'card');
+        cardElement.textContent = item.Title;
+        this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
+      });
+    } else {
+      let nothingData = document.createElement('p');
+      nothingData.textContent = 'Something went wrong';
+      this.shadowRoot.querySelector('.cards-container').appendChild(nothingData);
+    }
+  }
+
   render() {
     this.shadowRoot.innerHTML =
       /*html*/
-      `<ul class="cards-container">
-      ${
-        this.getAttribute('data').length > 10
-          ? JSON.parse(this.getAttribute('data')).map((item) => {
-              return /*html*/ `<li class="card" id=${generarID()}>${item.Title}</li>`;
-            })
-          : 'Something went wrong'
-      }
-      </ul>`;
+      `<ul class="cards-container"></ul>`;
+    this.renderCards();
     this.shadowRoot.innerHTML += styles;
   }
 
