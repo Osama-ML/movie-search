@@ -3,10 +3,10 @@
  */
 import { InputOML } from '../../components/Input/Input-OML';
 
-test('Prueba de random', () => {
+test('Test input component to be defined in DOM', () => {
   const inputOML = new InputOML();
   let data = document.createElement('div');
   data.appendChild(inputOML);
-  data.textContent = 'prueba';
-  expect(inputOML).toBeDefined();
+  let newComponent = data.querySelector('input-oml');
+  expect(newComponent).toBeDefined();
 });
