@@ -1,6 +1,6 @@
 import { handleMockResponse } from '../../mocks/movies-mock-response-handler.js';
 import { styles } from './Button-OML.styles.js';
-import { apiKey } from './variables.js';
+// import { apiKey } from './variables.js';
 
 export class ButtonOML extends HTMLElement {
   constructor() {
