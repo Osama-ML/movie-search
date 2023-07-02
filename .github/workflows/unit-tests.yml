@@ -1,4 +1,4 @@
-name: Prueba test unitarios
+name: -CI- Unit Tests
 run-name: Unit tests
 on: [push]
 jobs:
