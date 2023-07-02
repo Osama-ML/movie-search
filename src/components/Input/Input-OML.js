@@ -1,6 +1,6 @@
 import { styles } from './Input-OML.styles.js';
 
-class InputOML extends HTMLElement {
+export class InputOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });

@@ -2,7 +2,7 @@ import { handleMockResponse } from '../../mocks/movies-mock-response-handler.js'
 import { styles } from './Button-OML.styles.js';
 import { apiKey } from './variables.js';
 
-class ButtonOML extends HTMLElement {
+export class ButtonOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });

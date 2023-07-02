@@ -1,6 +1,6 @@
 import { styles } from './Search-OML.styles';
 
-class SearchOML extends HTMLElement {
+export class SearchOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });

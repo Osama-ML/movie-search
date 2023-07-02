@@ -1,7 +1,7 @@
 import { generarID } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
-class CardsContainerOML extends HTMLElement {
+export class CardsContainerOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
