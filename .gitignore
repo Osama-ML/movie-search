@@ -3,4 +3,3 @@ build
 .env
 .prettierignore
 .prettierrc
-variables.js
