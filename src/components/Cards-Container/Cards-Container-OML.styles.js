@@ -4,7 +4,7 @@ export const styles = /* css */ `
             display: flex;
             flex-direction: row;
             margin-top: 16px;
-            justify-content: space-between;
+            flex-wrap: wrap;
             width: 80vw;
             height: auto;
             gap: 10px;

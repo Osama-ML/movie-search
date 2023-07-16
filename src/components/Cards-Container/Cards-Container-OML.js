@@ -1,4 +1,4 @@
-import { generarID } from '../../utils.js';
+import { generarID, parseFetchedData } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 export class CardsContainerOML extends HTMLElement {
@@ -20,12 +20,26 @@ export class CardsContainerOML extends HTMLElement {
   }
 
   renderCards() {
-    if (this.getAttribute('data').length > 10) {
-      JSON.parse(this.getAttribute('data')).map((item) => {
+    let data;
+    try {
+      data = JSON.parse(this.getAttribute('data')) || [];
+    } catch {
+      data = [];
+    }
+    if (data.length > 1) {
+      parseFetchedData(data).map((item) => {
         let cardElement = document.createElement('li');
         cardElement.setAttribute('id', generarID());
         cardElement.setAttribute('class', 'card');
-        cardElement.textContent = item.Title;
+        let titleElement = document.createElement('p');
+        titleElement.textContent = item['title'];
+        titleElement.style.margin = '0 0 8px 0';
+        cardElement.appendChild(titleElement);
+        let imgElement = document.createElement('img');
+        imgElement.src = item['img_poster'];
+        imgElement.height = '200';
+        imgElement.style.borderRadius = '10px';
+        cardElement.appendChild(imgElement);
         this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
       });
     } else {
