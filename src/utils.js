@@ -7,3 +7,20 @@ export function generarID() {
   }
   return idGenerado;
 }
+
+export function parseFetchedData(data) {
+  let resultData = [];
+  data.map((item) => {
+    let objStructure = {};
+    Object.keys(item).map((key) => {
+      if (key.includes('#')) {
+        let keyFormated = key.slice(1).toLowerCase();
+        objStructure[keyFormated] = item[key];
+      } else {
+        objStructure[key] = item[key];
+      }
+    });
+    resultData.push(objStructure);
+  });
+  return resultData;
+}
