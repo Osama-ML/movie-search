@@ -6,6 +6,7 @@ export class InputOML extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.setAttribute('value', '');
+    this.inputDebounce = debounce(this.sendInputData, 500);
   }
 
   static get observedAttributes() {
@@ -14,7 +15,11 @@ export class InputOML extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'value') {
-      inputDebounce(newVal);
+      try {
+        this.inputDebounce(newVal);
+      } catch {
+        this.sendInputData(newVal);
+      }
     }
   }
 
@@ -50,5 +55,5 @@ export class InputOML extends HTMLElement {
     this.manageInput();
   }
 }
-const inputDebounce = debounce(InputOML.sendInputData, 300);
+
 window.customElements.define('input-oml', InputOML);
