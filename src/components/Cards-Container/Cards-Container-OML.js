@@ -1,4 +1,4 @@
-import { generarID, parseFetchedData } from '../../utils.js';
+import { generarID } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 export class CardsContainerOML extends HTMLElement {
@@ -27,7 +27,7 @@ export class CardsContainerOML extends HTMLElement {
       data = [];
     }
     if (data.length > 1) {
-      parseFetchedData(data).map((item) => {
+      data.map((item) => {
         let cardElement = document.createElement('li');
         cardElement.setAttribute('id', generarID());
         cardElement.setAttribute('class', 'card');
