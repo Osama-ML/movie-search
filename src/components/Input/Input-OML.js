@@ -1,3 +1,4 @@
+import { debounce } from '../../utils.js';
 import { styles } from './Input-OML.styles.js';
 
 export class InputOML extends HTMLElement {
@@ -5,6 +6,7 @@ export class InputOML extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.setAttribute('value', '');
+    this.inputDebounce = debounce(this.sendInputData, 300);
   }
 
   static get observedAttributes() {
@@ -13,13 +15,17 @@ export class InputOML extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'value') {
-      const newInputValueEvent = new CustomEvent('[input-oml]-new-value', {
-        detail: { data: newVal },
-        bubbles: true,
-        composed: true,
-      });
-      this.dispatchEvent(newInputValueEvent);
+      this.inputDebounce(newVal);
     }
+  }
+
+  sendInputData(newVal) {
+    const newInputValueEvent = new CustomEvent('[input-oml]-new-value', {
+      detail: { data: newVal },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(newInputValueEvent);
   }
 
   handleInput(e) {
