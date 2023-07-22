@@ -1,7 +1,6 @@
 import { debounce } from '../../utils.js';
 import { styles } from './Input-OML.styles.js';
 
-const inputDebounce = debounce(InputOML.sendInputData, 300);
 export class InputOML extends HTMLElement {
   constructor() {
     super();
@@ -51,5 +50,5 @@ export class InputOML extends HTMLElement {
     this.manageInput();
   }
 }
-
+const inputDebounce = debounce(InputOML.sendInputData, 300);
 window.customElements.define('input-oml', InputOML);
