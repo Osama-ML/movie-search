@@ -1,12 +1,12 @@
 import { debounce } from '../../utils.js';
 import { styles } from './Input-OML.styles.js';
 
+const inputDebounce = debounce(InputOML.sendInputData, 300);
 export class InputOML extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
     this.setAttribute('value', '');
-    this.inputDebounce = debounce(this.sendInputData, 300);
   }
 
   static get observedAttributes() {
@@ -15,7 +15,7 @@ export class InputOML extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'value') {
-      this.inputDebounce(newVal);
+      inputDebounce(newVal);
     }
   }
 
