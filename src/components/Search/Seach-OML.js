@@ -17,7 +17,15 @@ export class SearchOML extends HTMLElement {
       this.setAttribute('titleToSearch', event.detail.data);
       let titleToFetch = this.getAttribute('titleToSearch');
       try {
-        fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
+        const loaderShowEvent = new CustomEvent('[search-oml]-show-loader', {
+          detail: true,
+          bubbles: true,
+          composed: true,
+        })
+        this.dispatchEvent(loaderShowEvent);
+        console.log('showing loader')
+        setTimeout(() => {
+          fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
           .then((response) => {
             return response.json();
           })
@@ -30,6 +38,16 @@ export class SearchOML extends HTMLElement {
             });
             this.dispatchEvent(searchResponsedEvent);
           });
+        }, 2500)
+        setTimeout(() => {
+          const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
+            detail: false,
+            bubbles: true,
+            composed: true,
+          });
+          this.dispatchEvent(loaderHideEvent);
+          console.log('hinding loader')
+        }, 500)
       } catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
           detail: { data: [] },
