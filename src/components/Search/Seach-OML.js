@@ -23,7 +23,6 @@ export class SearchOML extends HTMLElement {
           composed: true,
         })
         this.dispatchEvent(loaderShowEvent);
-        console.log('showing loader')
         setTimeout(() => {
           fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
           .then((response) => {
@@ -46,7 +45,6 @@ export class SearchOML extends HTMLElement {
             composed: true,
           });
           this.dispatchEvent(loaderHideEvent);
-          console.log('hinding loader')
         }, 500)
       } catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {

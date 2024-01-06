@@ -8,7 +8,6 @@ export class LoaderOML extends HTMLElement {
       }
       handleEvent(event){
             if(event.type === '[search-oml]-show-loader') {
-                  console.log(event.detail)
                   this.setAttribute('hiddingLoader', !event.detail);
                   this.render();
             }
