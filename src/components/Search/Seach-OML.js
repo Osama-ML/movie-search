@@ -17,19 +17,34 @@ export class SearchOML extends HTMLElement {
       this.setAttribute('titleToSearch', event.detail.data);
       let titleToFetch = this.getAttribute('titleToSearch');
       try {
+        const loaderShowEvent = new CustomEvent('[search-oml]-show-loader', {
+          detail: true,
+          bubbles: true,
+          composed: true,
+        })
+        this.dispatchEvent(loaderShowEvent);
+
         fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            let fetchData = parseFetchedData(data.description);
-            const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
-              detail: { data: JSON.stringify(fetchData) },
-              bubbles: true,
-              composed: true,
-            });
-            this.dispatchEvent(searchResponsedEvent);
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          let fetchData = parseFetchedData(data.description);
+          const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
+            detail: { data: JSON.stringify(fetchData) },
+            bubbles: true,
+            composed: true,
           });
+          this.dispatchEvent(searchResponsedEvent);
+        });
+        setTimeout(() => {
+          const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
+            detail: false,
+            bubbles: true,
+            composed: true,
+          });
+          this.dispatchEvent(loaderHideEvent);
+        }, 2500)
       } catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
           detail: { data: [] },
