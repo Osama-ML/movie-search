@@ -23,21 +23,20 @@ export class SearchOML extends HTMLElement {
           composed: true,
         })
         this.dispatchEvent(loaderShowEvent);
-        setTimeout(() => {
-          fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            let fetchData = parseFetchedData(data.description);
-            const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
-              detail: { data: JSON.stringify(fetchData) },
-              bubbles: true,
-              composed: true,
-            });
-            this.dispatchEvent(searchResponsedEvent);
+
+        fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          let fetchData = parseFetchedData(data.description);
+          const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
+            detail: { data: JSON.stringify(fetchData) },
+            bubbles: true,
+            composed: true,
           });
-        }, 2500)
+          this.dispatchEvent(searchResponsedEvent);
+        });
         setTimeout(() => {
           const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
             detail: false,
@@ -45,7 +44,7 @@ export class SearchOML extends HTMLElement {
             composed: true,
           });
           this.dispatchEvent(loaderHideEvent);
-        }, 500)
+        }, 2500)
       } catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
           detail: { data: [] },
