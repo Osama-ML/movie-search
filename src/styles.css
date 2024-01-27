@@ -31,11 +31,3 @@ footer {
 .content {
   position: relative;
 }
-
-loader-oml {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 5px;
-  z-index: 5;
-}
