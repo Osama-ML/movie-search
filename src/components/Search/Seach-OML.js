@@ -12,7 +12,7 @@ export class SearchOML extends HTMLElement {
     return ['titleToSearch'];
   }
 
-  handleEvent(event) {
+  async handleEvent(event) {
     if (event.type === '[input-oml]-new-value') {
       this.setAttribute('titleToSearch', event.detail.data);
       let titleToFetch = this.getAttribute('titleToSearch');
@@ -23,29 +23,25 @@ export class SearchOML extends HTMLElement {
           composed: true,
         })
         this.dispatchEvent(loaderShowEvent);
-
-        fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          let fetchData = parseFetchedData(data.description);
-          const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
-            detail: { data: JSON.stringify(fetchData) },
-            bubbles: true,
-            composed: true,
-          });
-          this.dispatchEvent(searchResponsedEvent);
+        
+        const response = await fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`);
+        const data = await response.json();
+        let fetchData = parseFetchedData(data.description);
+        const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
+          detail: { data: JSON.stringify(fetchData) },
+          bubbles: true,
+          composed: true,
         });
-        setTimeout(() => {
-          const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
-            detail: false,
-            bubbles: true,
-            composed: true,
-          });
-          this.dispatchEvent(loaderHideEvent);
-        }, 2500)
-      } catch {
+        this.dispatchEvent(searchResponsedEvent);
+        
+        const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
+          detail: false,
+          bubbles: true,
+          composed: true,
+        });
+        this.dispatchEvent(loaderHideEvent);
+      }
+      catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {
           detail: { data: [] },
           bubbles: true,
