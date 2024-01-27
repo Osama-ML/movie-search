@@ -28,18 +28,10 @@ export class CardsContainerOML extends HTMLElement {
     }
     if (data.length > 1) {
       data.map((item) => {
-        let cardElement = document.createElement('li');
+        let cardElement = document.createElement('card-oml');
         cardElement.setAttribute('id', generarID());
-        cardElement.setAttribute('class', 'card');
-        let titleElement = document.createElement('p');
-        titleElement.textContent = item['title'];
-        titleElement.style.margin = '0 0 8px 0';
-        cardElement.appendChild(titleElement);
-        let imgElement = document.createElement('img');
-        imgElement.src = item['img_poster'];
-        imgElement.height = '200';
-        imgElement.style.borderRadius = '10px';
-        cardElement.appendChild(imgElement);
+        cardElement.setAttribute('title', item['title']);
+        cardElement.setAttribute('img', item['img_poster']);
         this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
       });
     } else {
