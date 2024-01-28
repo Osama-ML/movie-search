@@ -30,4 +30,8 @@ footer {
 
 .content {
   position: relative;
+  height: 75vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
