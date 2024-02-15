@@ -1,4 +1,4 @@
-import { generarID } from '../../utils.js';
+import { generarID, showLoader } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 export class CardsContainerOML extends HTMLElement {
@@ -9,7 +9,7 @@ export class CardsContainerOML extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['data'];
+    return [ 'data' ];
   }
 
   handleEvent(event) {
@@ -20,6 +20,7 @@ export class CardsContainerOML extends HTMLElement {
   }
 
   renderCards() {
+    showLoader();
     let data;
     try {
       data = JSON.parse(this.getAttribute('data')) || [];
@@ -30,8 +31,8 @@ export class CardsContainerOML extends HTMLElement {
       data.map((item) => {
         let cardElement = document.createElement('card-oml');
         cardElement.setAttribute('id', generarID());
-        cardElement.setAttribute('title', item['title']);
-        cardElement.setAttribute('img', item['img_poster']);
+        cardElement.setAttribute('title', item[ 'title' ]);
+        cardElement.setAttribute('img', item[ 'img_poster' ]);
         this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
       });
     } else {

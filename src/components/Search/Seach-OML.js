@@ -1,4 +1,4 @@
-import { parseFetchedData } from '../../utils';
+import { hideLoader, parseFetchedData, showLoader } from '../../utils';
 import { styles } from './Search-OML.styles';
 
 export class SearchOML extends HTMLElement {
@@ -9,7 +9,7 @@ export class SearchOML extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['titleToSearch'];
+    return [ 'titleToSearch' ];
   }
 
   async handleEvent(event) {
@@ -17,13 +17,8 @@ export class SearchOML extends HTMLElement {
       this.setAttribute('titleToSearch', event.detail.data);
       let titleToFetch = this.getAttribute('titleToSearch');
       try {
-        const loaderShowEvent = new CustomEvent('[search-oml]-show-loader', {
-          detail: true,
-          bubbles: true,
-          composed: true,
-        })
-        this.dispatchEvent(loaderShowEvent);
-        
+        showLoader();
+
         const response = await fetch(`https://search.imdbot.workers.dev/?q=${titleToFetch}`);
         const data = await response.json();
         let fetchData = parseFetchedData(data.description);
@@ -33,13 +28,8 @@ export class SearchOML extends HTMLElement {
           composed: true,
         });
         this.dispatchEvent(searchResponsedEvent);
-        
-        const loaderHideEvent = new CustomEvent('[search-oml]-show-loader', {
-          detail: false,
-          bubbles: true,
-          composed: true,
-        });
-        this.dispatchEvent(loaderHideEvent);
+
+        hideLoader();
       }
       catch {
         const searchResponsedEvent = new CustomEvent('[search-oml]-response-value', {

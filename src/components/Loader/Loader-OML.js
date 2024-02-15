@@ -6,8 +6,8 @@ export class LoaderOML extends HTMLElement {
             this.attachShadow({ mode: 'open' });
             this.setAttribute('hiddingLoader', true);
       }
-      handleEvent(event){
-            if(event.type === '[search-oml]-show-loader') {
+      handleEvent(event) {
+            if (event.type === 'show-loader') {
                   this.setAttribute('hiddingLoader', !event.detail);
                   this.render();
             }
@@ -32,7 +32,7 @@ export class LoaderOML extends HTMLElement {
             this.shadowRoot.innerHTML += styles;
       }
       connectedCallback() {
-            document.addEventListener('[search-oml]-show-loader', this);
+            document.addEventListener('show-loader', this);
             this.render();
       }
 }
