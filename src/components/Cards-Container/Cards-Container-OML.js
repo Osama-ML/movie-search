@@ -1,4 +1,4 @@
-import { generarID, showLoader } from '../../utils.js';
+import { generarID, hideLoader, showLoader } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 export class CardsContainerOML extends HTMLElement {
@@ -19,8 +19,14 @@ export class CardsContainerOML extends HTMLElement {
     }
   }
 
+  async handleImgs(imgUrl) {
+    const imageFetched = await fetch(imgUrl);
+    const blobImg = await imageFetched.blob();
+    const urlBlob = URL.createObjectURL(blobImg);
+    return urlBlob;
+  }
+
   renderCards() {
-    showLoader();
     let data;
     try {
       data = JSON.parse(this.getAttribute('data')) || [];
@@ -28,11 +34,12 @@ export class CardsContainerOML extends HTMLElement {
       data = [];
     }
     if (data.length > 1) {
-      data.map((item) => {
+      data.map(async (item) => {
+        const imgPoster = await this.handleImgs(item[ 'img_poster' ]);
         let cardElement = document.createElement('card-oml');
+        cardElement.setAttribute('img', imgPoster);
         cardElement.setAttribute('id', generarID());
         cardElement.setAttribute('title', item[ 'title' ]);
-        cardElement.setAttribute('img', item[ 'img_poster' ]);
         this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
       });
     } else {
@@ -48,6 +55,7 @@ export class CardsContainerOML extends HTMLElement {
       `<ul class="cards-container"></ul>`;
     this.renderCards();
     this.shadowRoot.innerHTML += styles;
+    this.dispatchEvent(hideLoader());
   }
 
   connectedCallback() {
