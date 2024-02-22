@@ -44,7 +44,7 @@ export const showLoader = () => {
     bubbles: true,
     composed: true,
   })
-  dispatchEvent(loaderShowEvent);
+  return loaderShowEvent;
 }
 
 export const hideLoader = () => {
@@ -53,5 +53,5 @@ export const hideLoader = () => {
     bubbles: true,
     composed: true,
   })
-  dispatchEvent(loaderHideEvent);
+  return loaderHideEvent;
 }

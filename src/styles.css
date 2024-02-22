@@ -36,3 +36,8 @@ footer {
     display: flex;
     justify-content: center;
 }
+loader-oml {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

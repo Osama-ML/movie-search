@@ -1,8 +1,6 @@
 export const styles = /* css */ `
     <style>
         div {
-            position: absolute;
-            top: 5px;
             color: white;
             width: 100%;
             height: 100%;
@@ -11,6 +9,9 @@ export const styles = /* css */ `
             justify-content: center;
             align-items: center;
             z-index: 5;
+        }
+        svg {
+            flex: 1;
         }
         .hidden {
             display: none;

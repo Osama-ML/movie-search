@@ -5,16 +5,17 @@ export class CardOML extends HTMLElement {
             super();
             this.attachShadow({ mode: 'open' });
       }
-      connectedCallback(){
+      connectedCallback() {
             this.render();
       }
-      render(){
-            this.shadowRoot.innerHTML = 
-            /*html*/ 
-            `<li class="card" id=${this.getAttribute('id')}>
-                  <p class="card__title">${this.getAttribute('title')}</p>
-                  <img class="card__image" src=${this.getAttribute('img')}>
-            </li>`
+
+      render() {
+            this.shadowRoot.innerHTML =
+                  /*html*/
+                  `<li class="card" id=${this.getAttribute('id')}>
+                        <p class="card__title">${this.getAttribute('title')}</p>
+                        <img class="card__image" src=${this.getAttribute('img')}>
+                  </li>`
             this.shadowRoot.innerHTML += styles;
       }
 }
