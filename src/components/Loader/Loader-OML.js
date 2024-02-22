@@ -14,9 +14,7 @@ export class LoaderOML extends HTMLElement {
       }
       render() {
             this.shadowRoot.innerHTML = /* html */`
-                  <div ${this.getAttribute('hiddingLoader') === 'true' ? 'hidden' : ''}
-                  class=${this.getAttribute('hiddingLoader') === 'true' ? 'hidden' : ''}
-                  >
+                  <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" stroke="#fff">
                               <g fill="none" fill-rule="evenodd">
                                     <g transform="translate(1 1)" stroke-width="2">
