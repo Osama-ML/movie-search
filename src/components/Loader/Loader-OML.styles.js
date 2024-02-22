@@ -1,8 +1,15 @@
 export const styles = /* css */ `
     <style>
-        div {
+        :host{
             position: absolute;
-            top: 5px;
+            width: 100%;
+            height: 100%;
+        }
+        :host[hiddingloader="true"] {
+            display: none;
+            z-index: -1;
+        }
+        div {
             color: white;
             width: 100%;
             height: 100%;
@@ -12,9 +19,8 @@ export const styles = /* css */ `
             align-items: center;
             z-index: 5;
         }
-        .hidden {
-            display: none;
-            z-index: -1;
+        svg {
+            flex: 1;
         }
     </style>
 `;

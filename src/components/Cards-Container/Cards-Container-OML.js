@@ -1,4 +1,4 @@
-import { generarID } from '../../utils.js';
+import { generarID, hideLoader, showLoader } from '../../utils.js';
 import { styles } from './Cards-Container-OML.styles.js';
 
 export class CardsContainerOML extends HTMLElement {
@@ -9,7 +9,7 @@ export class CardsContainerOML extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['data'];
+    return [ 'data' ];
   }
 
   handleEvent(event) {
@@ -17,6 +17,13 @@ export class CardsContainerOML extends HTMLElement {
       this.setAttribute('data', event.detail.data);
       this.render();
     }
+  }
+
+  async handleImgs(imgUrl) {
+    const imageFetched = await fetch(imgUrl);
+    const blobImg = await imageFetched.blob();
+    const urlBlob = URL.createObjectURL(blobImg);
+    return urlBlob;
   }
 
   renderCards() {
@@ -27,19 +34,12 @@ export class CardsContainerOML extends HTMLElement {
       data = [];
     }
     if (data.length > 1) {
-      data.map((item) => {
-        let cardElement = document.createElement('li');
+      data.map(async (item) => {
+        const imgPoster = await this.handleImgs(item[ 'img_poster' ]);
+        let cardElement = document.createElement('card-oml');
+        cardElement.setAttribute('img', imgPoster);
         cardElement.setAttribute('id', generarID());
-        cardElement.setAttribute('class', 'card');
-        let titleElement = document.createElement('p');
-        titleElement.textContent = item['title'];
-        titleElement.style.margin = '0 0 8px 0';
-        cardElement.appendChild(titleElement);
-        let imgElement = document.createElement('img');
-        imgElement.src = item['img_poster'];
-        imgElement.height = '200';
-        imgElement.style.borderRadius = '10px';
-        cardElement.appendChild(imgElement);
+        cardElement.setAttribute('title', item[ 'title' ]);
         this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
       });
     } else {
@@ -55,6 +55,9 @@ export class CardsContainerOML extends HTMLElement {
       `<ul class="cards-container"></ul>`;
     this.renderCards();
     this.shadowRoot.innerHTML += styles;
+    setTimeout(() => {
+      this.dispatchEvent(hideLoader());
+    }, 1000)
   }
 
   connectedCallback() {

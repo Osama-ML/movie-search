@@ -15,9 +15,9 @@ export function parseFetchedData(data) {
     Object.keys(item).map((key) => {
       if (key.includes('#')) {
         let keyFormated = key.slice(1).toLowerCase();
-        objStructure[keyFormated] = item[key];
+        objStructure[ keyFormated ] = item[ key ];
       } else {
-        objStructure[key] = item[key];
+        objStructure[ key ] = item[ key ];
       }
     });
     resultData.push(objStructure);
@@ -35,4 +35,23 @@ export function debounce(func, delay) {
       func.apply(context, args);
     }, delay);
   };
+}
+
+
+export const showLoader = () => {
+  const loaderShowEvent = new CustomEvent('show-loader', {
+    detail: true,
+    bubbles: true,
+    composed: true,
+  })
+  return loaderShowEvent;
+}
+
+export const hideLoader = () => {
+  const loaderHideEvent = new CustomEvent('show-loader', {
+    detail: false,
+    bubbles: true,
+    composed: true,
+  })
+  return loaderHideEvent;
 }

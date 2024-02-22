@@ -6,17 +6,15 @@ export class LoaderOML extends HTMLElement {
             this.attachShadow({ mode: 'open' });
             this.setAttribute('hiddingLoader', true);
       }
-      handleEvent(event){
-            if(event.type === '[search-oml]-show-loader') {
+      handleEvent(event) {
+            if (event.type === 'show-loader') {
                   this.setAttribute('hiddingLoader', !event.detail);
                   this.render();
             }
       }
       render() {
             this.shadowRoot.innerHTML = /* html */`
-                  <div ${this.getAttribute('hiddingLoader') === 'true' ? 'hidden' : ''}
-                  class=${this.getAttribute('hiddingLoader') === 'true' ? 'hidden' : ''}
-                  >
+                  <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" stroke="#fff">
                               <g fill="none" fill-rule="evenodd">
                                     <g transform="translate(1 1)" stroke-width="2">
@@ -32,7 +30,7 @@ export class LoaderOML extends HTMLElement {
             this.shadowRoot.innerHTML += styles;
       }
       connectedCallback() {
-            document.addEventListener('[search-oml]-show-loader', this);
+            document.addEventListener('show-loader', this);
             this.render();
       }
 }
