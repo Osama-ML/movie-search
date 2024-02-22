@@ -55,7 +55,9 @@ export class CardsContainerOML extends HTMLElement {
       `<ul class="cards-container"></ul>`;
     this.renderCards();
     this.shadowRoot.innerHTML += styles;
-    this.dispatchEvent(hideLoader());
+    setTimeout(() => {
+      this.dispatchEvent(hideLoader());
+    }, 1000)
   }
 
   connectedCallback() {
