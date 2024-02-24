@@ -5,3 +5,6 @@ import './components/Cards-Container/Cards-Container-OML';
 import './components/Loader/Loader-OML'
 import './components/Card/Card-OML'
 import './styles.css';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+injectSpeedInsights();

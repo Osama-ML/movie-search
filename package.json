@@ -27,6 +27,7 @@
         "webpack-dev-server": "^4.13.0"
     },
     "dependencies": {
+        "@vercel/speed-insights": "^1.0.10",
         "dotenv": "^16.0.3"
     }
 }
