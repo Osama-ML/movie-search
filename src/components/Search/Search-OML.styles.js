@@ -1,7 +1,7 @@
 export const styles = /* css */ `
     <style>
         .search-component {
-            position: relative;
+            margin: 8px 0;
         }
     </style>
 `;
