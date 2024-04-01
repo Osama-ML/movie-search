@@ -28,13 +28,19 @@ h1 {
 
 footer {
     text-align: center;
+    height: 9.8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .content {
     position: relative;
     height: 75vh;
     width: 100vw;
-    overflow-y: scroll;
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 loader-oml[hiddingloader="true"] {

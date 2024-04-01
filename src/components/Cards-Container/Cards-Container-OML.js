@@ -44,6 +44,7 @@ export class CardsContainerOML extends HTMLElement {
       });
     } else {
       let nothingData = document.createElement('p');
+      nothingData.classList = 'first-search'
       nothingData.textContent = 'Something went wrong';
       this.shadowRoot.querySelector('.cards-container').appendChild(nothingData);
     }
