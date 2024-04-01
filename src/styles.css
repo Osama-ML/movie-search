@@ -34,8 +34,7 @@ footer {
     position: relative;
     height: 75vh;
     width: 100vw;
-    display: flex;
-    justify-content: center;
+    overflow-y: scroll;
 }
 
 loader-oml[hiddingloader="true"] {
