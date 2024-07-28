@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 import { InputOML } from '../../components/Input/Input-OML';
+import { test, expect } from '@jest/globals';
 
 test('Test input component to be defined in DOM', () => {
   const inputOML = new InputOML();
