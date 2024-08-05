@@ -1,8 +1,9 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "prettier.semi": true, // agregar punto y coma
-    "prettier.singleQuote": false, // cambiar comillas simples por dobles
-    "prettier.arrowParens": "always", // agregar parentesis a los parametros de las arrow functions
-    "prettier.bracketSpacing": true // agregar espacios al momento de agregar una dependencia entre llaves
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.semi": true, // agregar punto y coma
+  "prettier.singleQuote": false, // cambiar comillas simples por dobles
+  "prettier.arrowParens": "always", // agregar parentesis a los parametros de las arrow functions
+  "prettier.bracketSpacing": true, // agregar espacios al momento de agregar una dependencia entre llaves
+  "prettier.tabWidth": 2
 }
