@@ -1,19 +1,19 @@
 import { styles } from "./Loader-OML.styles.js";
 
 export class LoaderOML extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
-        this.setAttribute("hiddingLoader", true);
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.setAttribute("hiddingLoader", true);
+  }
+  handleEvent(event) {
+    if (event.type === "show-loader") {
+      this.setAttribute("hiddingLoader", !event.detail);
+      this.render();
     }
-    handleEvent(event) {
-        if (event.type === "show-loader") {
-            this.setAttribute("hiddingLoader", !event.detail);
-            this.render();
-        }
-    }
-    render() {
-        this.shadowRoot.innerHTML = /* html */ `
+  }
+  render() {
+    this.shadowRoot.innerHTML = /* html */ `
                   <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" stroke="#fff">
                               <g fill="none" fill-rule="evenodd">
@@ -27,12 +27,12 @@ export class LoaderOML extends HTMLElement {
                         </svg>
                   </div>
             `;
-        this.shadowRoot.innerHTML += styles;
-    }
-    connectedCallback() {
-        document.addEventListener("show-loader", this);
-        this.render();
-    }
+    this.shadowRoot.innerHTML += styles;
+  }
+  connectedCallback() {
+    document.addEventListener("show-loader", this);
+    this.render();
+  }
 }
 
 window.customElements.define("loader-oml", LoaderOML);
