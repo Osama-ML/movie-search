@@ -1,7 +1,7 @@
-import { generarID } from '../utils';
-import { test, expect } from '@jest/globals';
+import { generarID } from "../utils";
+import { test, expect } from "@jest/globals";
 
-test('Prueba de generadir de IDs randoms', () => {
-  let data = generarID('game');
-  expect(data.length).toBe(6);
+test("Prueba de generadir de IDs randoms", () => {
+    let data = generarID("game");
+    expect(data.length).toBe(6);
 });
