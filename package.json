@@ -10,7 +10,7 @@
     "testw": "jest --watchAll",
     "testCoverage": "jest --coverage",
     "lint": "eslint ./",
-    "prettier": "prettier --write"
+    "prettier": "prettier --write ."
   },
   "keywords": [],
   "author": "",
