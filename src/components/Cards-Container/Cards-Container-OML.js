@@ -1,4 +1,4 @@
-import { generarID, hideLoader, showLoader } from "../../utils.js";
+import { generarID, hideLoader } from "../../utils.js";
 import { styles } from "./Cards-Container-OML.styles.js";
 
 export class CardsContainerOML extends HTMLElement {
