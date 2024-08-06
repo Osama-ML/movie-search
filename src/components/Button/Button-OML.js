@@ -1,26 +1,26 @@
-import { styles } from './Button-OML.styles.js';
+import { styles } from "./Button-OML.styles.js";
 
 export class ButtonOML extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.setAttribute('titleToSearch', '');
+    this.attachShadow({ mode: "open" });
+    this.setAttribute("titleToSearch", "");
   }
 
   static get observedAttributes() {
-    return ['titleToSearch'];
+    return ["titleToSearch"];
   }
 
   handleClick() {
-    const title = this.getAttribute('titleToSearch');
+    const title = this.getAttribute("titleToSearch");
 
-    const titleToSearchEvent = new CustomEvent('[button-oml]-search-value', {
+    const titleToSearchEvent = new CustomEvent("[button-oml]-search-value", {
       detail: { data: [] },
       bubbles: true,
       composed: true,
     });
 
-    title !== ''
+    title !== ""
       ? fetch(`https://search.imdbot.workers.dev/?q=${title}`)
           .then((response) => {
             return response.json();
@@ -33,18 +33,18 @@ export class ButtonOML extends HTMLElement {
   }
 
   handleEvent(event) {
-    if (event.type === '[search-oml]-search-value') {
-      this.setAttribute('titleToSearch', event.detail.data);
+    if (event.type === "[search-oml]-search-value") {
+      this.setAttribute("titleToSearch", event.detail.data);
     }
   }
 
   manageButton() {
-    this.button = this.shadowRoot.querySelector('button');
-    this.button.addEventListener('click', (e) => this.handleClick(e));
+    this.button = this.shadowRoot.querySelector("button");
+    this.button.addEventListener("click", (e) => this.handleClick(e));
   }
 
   connectedCallback() {
-    document.addEventListener('[search-oml]-search-value', this);
+    document.addEventListener("[search-oml]-search-value", this);
     this.render();
     this.manageButton();
   }
@@ -59,4 +59,4 @@ export class ButtonOML extends HTMLElement {
   }
 }
 
-window.customElements.define('button-oml', ButtonOML);
+window.customElements.define("button-oml", ButtonOML);

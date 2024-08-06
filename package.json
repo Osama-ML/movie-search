@@ -1,33 +1,42 @@
 {
-    "name": "movie-search",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "build": "webpack --mode=production",
-        "dev": "webpack serve --mode=development",
-        "test": "jest",
-        "testw": "jest --watchAll",
-        "testCoverage": "jest --coverage"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@babel/core": "^7.22.5",
-        "@babel/preset-env": "^7.22.5",
-        "babel-jest": "^29.5.0",
-        "css-loader": "^6.7.3",
-        "html-webpack-plugin": "^5.5.0",
-        "jest": "^29.5.0",
-        "jest-environment-jsdom": "^29.5.0",
-        "style-loader": "^3.3.2",
-        "webpack": "^5.76.2",
-        "webpack-cli": "^5.0.1",
-        "webpack-dev-server": "^4.13.0"
-    },
-    "dependencies": {
-        "@vercel/speed-insights": "^1.0.10",
-        "dotenv": "^16.0.3"
-    }
+  "name": "movie-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack serve --mode=development",
+    "test": "jest",
+    "testw": "jest --watchAll",
+    "testCoverage": "jest --coverage",
+    "lint": "eslint ./",
+    "prettier": "prettier --write .",
+    "husky": "husky",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@eslint/js": "^9.8.0",
+    "babel-jest": "^29.5.0",
+    "css-loader": "^6.7.3",
+    "eslint": "^9.8.0",
+    "globals": "^15.8.0",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^9.1.4",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "prettier": "^3.3.3",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.0"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.10",
+    "dotenv": "^16.0.3"
+  }
 }

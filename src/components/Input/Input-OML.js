@@ -1,20 +1,20 @@
-import { debounce } from '../../utils.js';
-import { styles } from './Input-OML.styles.js';
+import { debounce } from "../../utils.js";
+import { styles } from "./Input-OML.styles.js";
 
 export class InputOML extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.setAttribute('value', '');
+    this.attachShadow({ mode: "open" });
+    this.setAttribute("value", "");
     this.inputDebounce = debounce(this.sendInputData, 500);
   }
 
   static get observedAttributes() {
-    return ['value'];
+    return ["value"];
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'value') {
+    if (name === "value") {
       try {
         this.inputDebounce(newVal);
       } catch {
@@ -24,7 +24,7 @@ export class InputOML extends HTMLElement {
   }
 
   sendInputData(newVal) {
-    const newInputValueEvent = new CustomEvent('[input-oml]-new-value', {
+    const newInputValueEvent = new CustomEvent("[input-oml]-new-value", {
       detail: { data: newVal },
       bubbles: true,
       composed: true,
@@ -33,14 +33,14 @@ export class InputOML extends HTMLElement {
   }
 
   handleInput(e) {
-    this.setAttribute('value', e.target.value);
+    this.setAttribute("value", e.target.value);
   }
 
   manageInput() {
-    this.input = this.shadowRoot.querySelector('input');
-    this.input.type = 'text';
-    this.input.className = 'input-html';
-    this.input.addEventListener('input', (e) => this.handleInput(e));
+    this.input = this.shadowRoot.querySelector("input");
+    this.input.type = "text";
+    this.input.className = "input-html";
+    this.input.addEventListener("input", (e) => this.handleInput(e));
   }
 
   render() {
@@ -56,4 +56,4 @@ export class InputOML extends HTMLElement {
   }
 }
 
-window.customElements.define('input-oml', InputOML);
+window.customElements.define("input-oml", InputOML);
