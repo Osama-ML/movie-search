@@ -1,6 +1,7 @@
 export function generarID() {
-  var caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-  var idGenerado = '';
+  var caracteres =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+  var idGenerado = "";
   for (var i = 0; i < 6; i++) {
     var indice = Math.floor(Math.random() * caracteres.length);
     idGenerado += caracteres.charAt(indice);
@@ -13,11 +14,11 @@ export function parseFetchedData(data) {
   data.map((item) => {
     let objStructure = {};
     Object.keys(item).map((key) => {
-      if (key.includes('#')) {
+      if (key.includes("#")) {
         let keyFormated = key.slice(1).toLowerCase();
-        objStructure[ keyFormated ] = item[ key ];
+        objStructure[keyFormated] = item[key];
       } else {
-        objStructure[ key ] = item[ key ];
+        objStructure[key] = item[key];
       }
     });
     resultData.push(objStructure);
@@ -37,21 +38,20 @@ export function debounce(func, delay) {
   };
 }
 
-
 export const showLoader = () => {
-  const loaderShowEvent = new CustomEvent('show-loader', {
+  const loaderShowEvent = new CustomEvent("show-loader", {
     detail: true,
     bubbles: true,
     composed: true,
-  })
+  });
   return loaderShowEvent;
-}
+};
 
 export const hideLoader = () => {
-  const loaderHideEvent = new CustomEvent('show-loader', {
+  const loaderHideEvent = new CustomEvent("show-loader", {
     detail: false,
     bubbles: true,
     composed: true,
-  })
+  });
   return loaderHideEvent;
-}
+};

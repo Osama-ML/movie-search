@@ -1,20 +1,20 @@
-import { generarID, hideLoader, showLoader } from '../../utils.js';
-import { styles } from './Cards-Container-OML.styles.js';
+import { generarID, hideLoader } from "../../utils.js";
+import { styles } from "./Cards-Container-OML.styles.js";
 
 export class CardsContainerOML extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.setAttribute('data', []);
+    this.attachShadow({ mode: "open" });
+    this.setAttribute("data", []);
   }
 
   static get observedAttributes() {
-    return [ 'data' ];
+    return [ "data" ];
   }
 
   handleEvent(event) {
-    if (event.type === '[search-oml]-response-value') {
-      this.setAttribute('data', event.detail.data);
+    if (event.type === "[search-oml]-response-value") {
+      this.setAttribute("data", event.detail.data);
       this.render();
     }
   }
@@ -29,18 +29,20 @@ export class CardsContainerOML extends HTMLElement {
   renderCards() {
     let data;
     try {
-      data = JSON.parse(this.getAttribute('data')) || [];
+      data = JSON.parse(this.getAttribute("data")) || [];
     } catch {
       data = [];
     }
     if (data.length > 1) {
       data.map(async (item) => {
-        const imgPoster = await this.handleImgs(item[ 'img_poster' ]);
-        let cardElement = document.createElement('card-oml');
-        cardElement.setAttribute('img', imgPoster);
-        cardElement.setAttribute('id', generarID());
-        cardElement.setAttribute('title', item[ 'title' ]);
-        this.shadowRoot.querySelector('.cards-container').appendChild(cardElement);
+        const imgPoster = await this.handleImgs(item[ "img_poster" ]);
+        let cardElement = document.createElement("card-oml");
+        cardElement.setAttribute("img", imgPoster);
+        cardElement.setAttribute("id", generarID());
+        cardElement.setAttribute("title", item[ "title" ]);
+        this.shadowRoot
+          .querySelector(".cards-container")
+          .appendChild(cardElement);
       });
     } else {
       let nothingData = document.createElement('p');
@@ -58,13 +60,13 @@ export class CardsContainerOML extends HTMLElement {
     this.shadowRoot.innerHTML += styles;
     setTimeout(() => {
       this.dispatchEvent(hideLoader());
-    }, 1000)
+    }, 1000);
   }
 
   connectedCallback() {
-    document.addEventListener('[search-oml]-response-value', this);
+    document.addEventListener("[search-oml]-response-value", this);
     this.render();
   }
 }
 
-window.customElements.define('cards-container-oml', CardsContainerOML);
+window.customElements.define("cards-container-oml", CardsContainerOML);

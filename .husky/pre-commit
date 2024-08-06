@@ -1,0 +1,1 @@
+npm runt test & npm run prettier & npm run lint
