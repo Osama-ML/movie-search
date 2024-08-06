@@ -9,7 +9,7 @@ export class CardsContainerOML extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return [ "data" ];
+    return ["data"];
   }
 
   handleEvent(event) {
@@ -35,20 +35,22 @@ export class CardsContainerOML extends HTMLElement {
     }
     if (data.length > 1) {
       data.map(async (item) => {
-        const imgPoster = await this.handleImgs(item[ "img_poster" ]);
+        const imgPoster = await this.handleImgs(item["img_poster"]);
         let cardElement = document.createElement("card-oml");
         cardElement.setAttribute("img", imgPoster);
         cardElement.setAttribute("id", generarID());
-        cardElement.setAttribute("title", item[ "title" ]);
+        cardElement.setAttribute("title", item["title"]);
         this.shadowRoot
           .querySelector(".cards-container")
           .appendChild(cardElement);
       });
     } else {
-      let nothingData = document.createElement('p');
-      nothingData.classList = 'first-search'
-      nothingData.textContent = 'Something went wrong';
-      this.shadowRoot.querySelector('.cards-container').appendChild(nothingData);
+      let nothingData = document.createElement("p");
+      nothingData.classList = "first-search";
+      nothingData.textContent = "Something went wrong";
+      this.shadowRoot
+        .querySelector(".cards-container")
+        .appendChild(nothingData);
     }
   }
 
